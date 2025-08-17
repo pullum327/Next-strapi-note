@@ -1,6 +1,10 @@
 # News App
 
 這是一個使用 Next.js 和 Strapi 的新聞應用程式。
+<img width="1017" height="891" alt="image" src="https://github.com/user-attachments/assets/eed69fba-dc36-4250-bfd1-9e58e68c33b1" />
+<img width="636" height="705" alt="image" src="https://github.com/user-attachments/assets/32e3ff3e-c625-45c4-b110-051dff9d7ee6" />
+<img width="1625" height="1187" alt="螢幕擷取畫面 2025-08-12 004544" src="https://github.com/user-attachments/assets/0217a5da-2398-4d30-ab5f-834031e84d93" />
+
 
 ## 功能特色
 
