@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# News App
 
-## Getting Started
+這是一個使用 Next.js 和 Strapi 的新聞應用程式。
 
-First, run the development server:
+## 功能特色
+
+- 顯示新聞列表
+- 新增新聞項目到資料庫
+- 支援封面圖片上傳
+- 響應式設計
+- 深色/淺色主題切換
+
+## 架構說明
+
+### 前端 (Next.js)
+- 使用 App Router 架構
+- Client Components 處理表單和狀態管理
+- API Routes 處理與 Strapi 的通信
+
+### 後端 (Strapi)
+- Headless CMS 提供內容管理
+- REST API 提供資料存取
+- Media Library 處理圖片上傳
+
+### API 端點
+- `GET /api/news-list` - 獲取新聞列表
+- `POST /api/news` - 新增新聞項目
+
+## 環境設定
+
+### 1. 設定環境變數
+
+在 `news-app` 目錄下創建 `.env.local` 檔案：
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Strapi 配置
+STRAPI_URL=http://localhost:1337
+STRAPI_TOKEN=your_strapi_api_token_here
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. 獲取 Strapi API Token
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. 啟動 Strapi 服務：
+   ```bash
+   cd my-strapi
+   npm run dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. 開啟瀏覽器訪問 `http://localhost:1337/admin`
 
-## Learn More
+3. 創建管理員帳號（如果是第一次使用）
 
-To learn more about Next.js, take a look at the following resources:
+4. 前往 `Settings > API Tokens > Create new API token`
+   - Name: `News App Token`
+   - Description: `Token for news app to create news items`
+   - Token duration: `Unlimited`
+   - Token type: `Full access`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. 複製生成的 token 並貼到 `.env.local` 檔案中
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 啟動專案
 
-## Deploy on Vercel
+### 1. 啟動 Strapi 後端
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+cd my-strapi
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 2. 啟動 Next.js 前端
+
+```bash
+cd news-app
+npm run dev
+```
+
+前端將在 `http://localhost:3000` 運行
+
+## 新增功能
+
+在首頁的最後有一個「新增新聞」按鈕，點擊後會開啟一個表單，可以：
+
+- 輸入新聞標題
+- 輸入新聞內容
+- 上傳封面圖片（可選）
+- 自動設定發布時間
+
+新增成功後，新聞列表會自動更新。
+
+## 測試功能
+
+訪問 `http://localhost:3000/test` 可以測試新增新聞功能。
+
+## 技術架構
+
+- **前端**: Next.js 15 + React 19 + TypeScript + Tailwind CSS
+- **後端**: Strapi 5 (Headless CMS)
+- **資料庫**: SQLite (開發環境)
+- **圖片上傳**: Strapi Media Library
+- **狀態管理**: React Hooks (useState, useEffect)
+- **API 通信**: Fetch API + Next.js API Routes
+
+## 問題解決
+
+### 已解決的問題
+- `server-only` 指令與 client component 的衝突
+- 環境變數在 client side 的存取限制
+- 圖片 URL 的處理和轉換
+
+### 解決方案
+- 將 Strapi 相關的 API 調用移到 Next.js API Routes
+- 使用 client component 處理表單和狀態
+- 透過 API Routes 處理與 Strapi 的通信
+
+## 注意事項
+
+- 確保 Strapi 服務正在運行
+- 確保環境變數正確設定
+- 圖片上傳需要 Strapi 的 upload API 權限
+- 新增成功後會自動重新載入新聞列表
+- 支援深色/淺色主題切換
